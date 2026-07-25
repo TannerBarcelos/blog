@@ -235,12 +235,12 @@ const modelRankings: RankItem[] = [
             { label: 'general assistant', tone: 'neutral' },
             { label: 'multimodal', tone: 'violet' },
             { label: 'fast', tone: 'emerald' },
-            { label: 'knowledge work', tone: 'sky' }
+            { label: 'image gen', tone: 'sky' }
         ],
-        body: 'I use Gemini 3.6 Flash in the Gemini app for everyday, non-coding help — travel, drafting, general chat, quick multimodal lookups. It stays out of my coding harnesses on purpose.',
+        body: 'I use Gemini 3.6 Flash in the Gemini app for everyday, non-coding help — travel, drafting, general chat, and image generation. It stays out of my coding harnesses on purpose.',
         pros: [
             'Quick for everyday questions and drafts',
-            'Handy when I need multimodal help outside a repo'
+            'My go-to in-app for image generation and other multimodal one-offs'
         ],
         cons: [
             'Not where I go for coding agents',
@@ -287,7 +287,7 @@ const harnessRankings: RankItem[] = [
             'Best overall mix of model access, UX, speed, and reliability',
             'Multi-surface clients (agents UI, editor, CLI) that all consume the same models and agents on my subscription'
         ],
-        cons: ['Platform churn still happens from time to time, espeically for research tasks']
+        cons: ['Platform churn still happens from time to time, especially for research tasks']
     },
     {
         rank: '02',
@@ -348,7 +348,7 @@ function tagClasses(tone: RankItem['tags'][number]['tone']) {
                 class="mt-6 max-w-2xl border-l border-main/20 dark:border-main/25 pl-3.5 text-[0.7rem] sm:text-xs text-muted/75 dark:text-muted/70 leading-relaxed tracking-wide"
             >
                 <span class="font-mono text-muted/90">Disclaimer.</span>{' '}
-                Rankings here are my personal opinions — not universal truth or a live snapshot of the current state of thefield. I still
+                Rankings here are my personal opinions — not universal truth or a live snapshot of the current state of the field. I still
                 review anything that touches production; models speed exploration but do not replace ownership.
             </p>
         </header>
