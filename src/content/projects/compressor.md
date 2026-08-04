@@ -7,6 +7,8 @@ tags:
   - planned
 isFeatured: true
 github: 'https://github.com/tannerbarcelos/compressor'
+technologies:
+  - Rust
 seo:
   description: 'Compressor — a context-compression layer that shrinks prompts before LLM inference to cut token spend and reclaim usable context window.'
 ---
@@ -34,6 +36,10 @@ Compressor sits between your application and the model. It takes the context you
 ## Direction
 
 The intended shape is a drop-in layer rather than a framework—something you point at an existing prompt-assembly path and measure, with compression aggressiveness as a tunable dial and a way to verify that answers don't regress once it's on.
+
+## Technology Stack
+
+- **Language:** Rust, for predictable low-latency compression on the hot path and safe, efficient handling of large context payloads.
 
 ## Status
 
