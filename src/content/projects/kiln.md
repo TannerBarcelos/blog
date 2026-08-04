@@ -2,7 +2,7 @@
 title: 'Kiln'
 description: 'An open platform for building, evaluating, packaging, deploying, governing, and operating production agents and intelligent applications.'
 publishDate: 'Aug 01 2026'
-lane: ai-agents
+lane: ai
 tags:
   - planned
 seo:

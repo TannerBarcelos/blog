@@ -2,7 +2,7 @@
 title: 'Relay'
 description: 'A native macOS control plane for agentic software. Relay turns scattered agent sessions into a single prioritized inbox: what finished, what failed, what is blocked, and what needs your approval.'
 publishDate: 'Aug 04 2026'
-lane: ai-agents
+lane: apps
 tags:
   - in-progress
 seo:

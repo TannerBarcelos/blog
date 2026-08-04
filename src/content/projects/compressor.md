@@ -2,7 +2,7 @@
 title: 'Compressor'
 description: 'Compress context before LLM inference to reduce token consumption, lower inference costs, and maximize effective context window utilization.'
 publishDate: 'Aug 01 2026'
-lane: ai-agents
+lane: ai
 tags:
   - planned
 seo:

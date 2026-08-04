@@ -2,7 +2,7 @@
 title: 'ctx2pod'
 description: 'Transform context into podcasts built for learning and knowledge discovery — turn documents, codebases, and research into audio you can actually absorb.'
 publishDate: 'Aug 01 2026'
-lane: ai-agents
+lane: apps
 tags:
   - planned
 seo:

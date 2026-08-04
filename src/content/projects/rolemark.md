@@ -2,7 +2,7 @@
 title: 'RoleMark'
 description: RoleMark is an AI-powered resume scoring and tailoring product that helps job seekers optimize resumes for specific roles, beat applicant tracking systems, and generate tailored versions and cover letters. Currently being rebuilt from the ground up.
 publishDate: 'Mar 29 2025'
-lane: ai-agents
+lane: apps
 tags:
   - in-progress
 seo:
