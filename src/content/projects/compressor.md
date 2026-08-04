@@ -5,6 +5,8 @@ publishDate: 'Aug 01 2026'
 lane: ai
 tags:
   - planned
+isFeatured: true
+github: 'https://github.com/tannerbarcelos/compressor'
 seo:
   description: 'Compressor — a context-compression layer that shrinks prompts before LLM inference to cut token spend and reclaim usable context window.'
 ---

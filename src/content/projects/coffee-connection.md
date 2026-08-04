@@ -5,6 +5,12 @@ publishDate: 'Apr 22 2021'
 lane: apps
 tags:
   - live
+github: 'https://github.com/tannerbarcelos/coffee-connection'
+technologies:
+  - React
+  - Node.js
+  - Express
+  - MongoDB
 seo:
   image:
     src: '/coffee_connection.jpeg'

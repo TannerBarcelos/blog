@@ -6,6 +6,7 @@ import {
     siAnthropic,
     siAstro,
     siBun,
+    siClaude,
     siCursor,
     siDatadog,
     siDocker,
@@ -41,6 +42,16 @@ import {
 
 const title = 'Tech Stack & State of AI';
 const description = 'What I use in production: languages, platforms, and AI tooling.';
+
+// No official xAI/Grok mark ships in simple-icons yet; this is a plain "G" monogram, not a trademark asset.
+const siGrok: SimpleIcon = {
+    title: 'Grok',
+    slug: 'grok',
+    svg: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5 7" fill="currentColor"><path d="M1,0h1v1h-1z M2,0h1v1h-1z M3,0h1v1h-1z M0,1h1v1h-1z M4,1h1v1h-1z M0,2h1v1h-1z M0,3h1v1h-1z M3,3h1v1h-1z M4,3h1v1h-1z M0,4h1v1h-1z M4,4h1v1h-1z M0,5h1v1h-1z M4,5h1v1h-1z M1,6h1v1h-1z M2,6h1v1h-1z M3,6h1v1h-1z"/></svg>',
+    path: 'M1,0h1v1h-1z M2,0h1v1h-1z M3,0h1v1h-1z M0,1h1v1h-1z M4,1h1v1h-1z M0,2h1v1h-1z M0,3h1v1h-1z M3,3h1v1h-1z M4,3h1v1h-1z M0,4h1v1h-1z M4,4h1v1h-1z M0,5h1v1h-1z M4,5h1v1h-1z M1,6h1v1h-1z M2,6h1v1h-1z M3,6h1v1h-1z',
+    source: 'https://x.ai',
+    hex: '000000'
+};
 
 const siOpenAI: SimpleIcon = {
     title: 'OpenAI',
@@ -173,15 +184,15 @@ const modelRankings: RankItem[] = [
             { label: 'distributed systems', tone: 'emerald' },
             { label: 'agentic coding', tone: 'neutral' }
         ],
-        body: 'My default when the work is hard. I use Opus 5 for frontend product work alongside Composer, and for complex backend and distributed-systems problems when I need real judgment — architecture, tradeoffs, and follow-through across a messy codebase.',
+        body: 'My default when the work is hard. I use Opus 5 for frontend product work alongside Grok, and for complex backend and distributed-systems problems when I need real judgment — architecture, tradeoffs, and follow-through across a messy codebase.',
         pros: [
             'Trusted for hard frontend and backend work, not just one side of the stack',
             'Best partner when the problem is ambiguous and I need strong reasoning',
-            'Pairs well with Composer: Opus for judgment, Composer for fast iteration'
+            'Pairs well with Grok: Opus for judgment, Grok for fast iteration'
         ],
         cons: [
             'Slower and more expensive than I want for every small edit',
-            'I switch to Composer 2.5 when I just need to move quickly in the editor'
+            'I switch to Grok 4.5 when I just need to move quickly in the editor'
         ]
     },
     {
@@ -203,28 +214,29 @@ const modelRankings: RankItem[] = [
         ],
         cons: [
             'Opus still wins for my hardest architecture and systems reasoning',
-            'Composer is what I use for everyday in-editor iteration'
+            'Grok is what I use for everyday in-editor iteration'
         ]
     },
     {
         rank: '03',
-        name: 'Composer 2.5',
-        icon: siCursor,
+        name: 'Grok 4.5',
+        icon: siGrok,
+        viewBox: '0 0 5 7',
         tags: [
-            { label: 'cursor only', tone: 'neutral' },
-            { label: 'frontend', tone: 'violet' },
+            { label: 'cursor', tone: 'neutral' },
+            { label: 'general purpose', tone: 'violet' },
             { label: 'fast iteration', tone: 'emerald' },
             { label: 'value', tone: 'sky' }
         ],
-        body: 'My day-to-day model in Cursor. I use Composer 2.5 for frontend and product implementation — layout, components, cleanup, and keeping momentum — and pull in Opus when the problem needs deeper judgment.',
+        body: 'My general-purpose developer agent in Cursor for fast work. I use Grok 4.5 for day-to-day implementation — layout, components, cleanup, and keeping momentum — and pull in Opus when the problem needs deeper judgment.',
         pros: [
-            'Fast enough that I stay in flow for UI and day-to-day coding',
-            'Excellent value for how much I lean on it inside Cursor',
+            'Fast enough that I stay in flow for day-to-day coding',
+            'Strong general-purpose default when I don’t need Opus-level reasoning',
             'Feels native to the editor loop I already live in'
         ],
         cons: [
-            'Only available in Cursor',
-            'I still escalate to Opus or Sol when the problem gets hard'
+            'I still escalate to Opus or Sol when the problem gets hard',
+            'Not my pick for deep architecture or systems-level work'
         ]
     },
     {
@@ -263,17 +275,29 @@ const modelHonorableMentions: MentionItem[] = [
             { label: 'frontend', tone: 'violet' },
             { label: 'on-device', tone: 'sky' }
         ]
-    },
-    {
-        name: 'Grok 4.5',
-        use: 'Coding sessions where I want a strong alternative coding model — especially useful outside my default harness stack.',
-        tags: [{ label: 'coding', tone: 'violet' }]
     }
 ];
 
 const harnessRankings: RankItem[] = [
     {
         rank: '01',
+        name: 'Claude Code',
+        icon: siClaude,
+        tags: [
+            { label: 'coding', tone: 'violet' },
+            { label: 'cli', tone: 'sky' },
+            { label: 'agentic', tone: 'emerald' }
+        ],
+        body: 'My top harness. Claude Code is where I reach for deep, agentic work — real ownership of a task across a messy repo, not just autocomplete. It pairs naturally with Opus and holds up well over long, multi-step sessions.',
+        pros: [
+            'Best agentic follow-through of anything I use, especially on long-horizon tasks',
+            'Terminal-native, so it fits directly into my existing workflow and tooling',
+            'Strong default pairing with Opus for hard problems'
+        ],
+        cons: ['Less of an all-in-one editor experience than Cursor for fast, visual UI iteration']
+    },
+    {
+        rank: '02',
         name: 'Cursor',
         icon: siCursor,
         tags: [
@@ -281,7 +305,7 @@ const harnessRankings: RankItem[] = [
             { label: 'editor', tone: 'sky' },
             { label: 'cloud agents', tone: 'emerald' }
         ],
-        body: 'My main harness and clear number one. Cursor wins for me because I can use all the models I care about, Composer usage is generous, cloud agents are a huge plus for real, ad-hoc development work, and the overall UX, speed, and reliability are strong enough that it just works and just makes sense.',
+        body: 'My main editor harness. Cursor wins for me because I can use all the models I care about, Grok usage is generous, cloud agents are a huge plus for real, ad-hoc development work, and the overall UX, speed, and reliability are strong enough that it just works and just makes sense.',
         pros: [
             'Cloud agents are a major strength',
             'Best overall mix of model access, UX, speed, and reliability',
@@ -290,7 +314,7 @@ const harnessRankings: RankItem[] = [
         cons: ['Platform churn still happens from time to time, especially for research tasks']
     },
     {
-        rank: '02',
+        rank: '03',
         name: 'Codex',
         icon: siOpenAI,
         viewBox: '0 0 16 16',
@@ -299,14 +323,14 @@ const harnessRankings: RankItem[] = [
             { label: 'agents', tone: 'emerald' },
             { label: 'openai', tone: 'sky' }
         ],
-        body: 'My number two harness. I reach for Codex often because it lives in ChatGPT — I can do knowledge work and coding in one interface, then kick off agent loops when I want to implement something without switching tools.',
+        body: 'My number three harness. I reach for Codex often because it lives in ChatGPT — I can do knowledge work and coding in one interface, then kick off agent loops when I want to implement something without switching tools.',
         pros: [
             'ChatGPT + coding in one place, so knowledge work and implementation stay together',
             'Strong when I want an agent to take a clear task and run with it',
-            'Nice complement to Cursor when I’m already in the OpenAI surface'
+            'Nice complement to Claude Code and Cursor when I’m already in the OpenAI surface'
         ],
         cons: [
-            'Cursor is still my default for editor-centric work and model choice',
+            'Claude Code and Cursor are still my default for editor-centric and deep agentic work',
             'I miss Cursor’s full IDE loop when I’m deep in a repo'
         ]
     }
@@ -314,8 +338,8 @@ const harnessRankings: RankItem[] = [
 
 const harnessHonorableMentions: MentionItem[] = [
     {
-        name: 'OpenCode',
-        use: 'A solid open coding harness I keep an eye on — useful when I want something outside Cursor and Codex.',
+        name: 'Pi',
+        use: 'A minimal, MIT-licensed terminal coding harness from Mario Zechner — a lean open agent harness I keep an eye on when I want something outside Claude Code, Cursor, and Codex.',
         tags: [
             { label: 'coding', tone: 'violet' },
             { label: 'open', tone: 'emerald' }

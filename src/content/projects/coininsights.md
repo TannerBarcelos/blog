@@ -5,6 +5,12 @@ publishDate: 'Oct 04 2022'
 lane: apps
 tags:
   - live
+github: 'https://github.com/tannerbarcelos/coininsights'
+technologies:
+  - React
+  - Redux
+  - Chart.js
+  - Firebase
 seo:
   image:
     src: '/coin.jpeg'

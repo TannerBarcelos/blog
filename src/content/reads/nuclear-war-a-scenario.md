@@ -16,8 +16,6 @@ description: >-
   Minute-by-minute investigative nonfiction about how a full exchange could unfold—reads like a thriller, sourced like
   a briefing book. I’m on audio.
 readProgress: reading
-readingNow: true
-readingNowOrder: 3
 seo:
   title: 'Nuclear War: A Scenario — Reads'
   description: 'Annie Jacobsen on the nuclear scenario—listening on the leisure shelf.'

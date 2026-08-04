@@ -1,11 +1,12 @@
 ---
 import { type CollectionEntry } from 'astro:content';
 import { projectTagsToBadges } from '../data/project-tags';
+import ProjectMeta from './ProjectMeta.astro';
 
 type Props = { project: CollectionEntry<'projects'>; class?: string; headingLevel?: 'h2' | 'h3' };
 
 const { project, class: className, headingLevel = 'h2' } = Astro.props;
-const { title, description, publishDate, tags } = project.data;
+const { title, description, publishDate, tags, technologies } = project.data;
 const TitleTag = headingLevel;
 const year = publishDate.getFullYear();
 const tagBadges = projectTagsToBadges(tags);
@@ -36,6 +37,7 @@ const tagBadges = projectTagsToBadges(tags);
                     <p class="mt-1.5 text-sm text-muted leading-relaxed line-clamp-2">{description}</p>
                 )
             }
+            {technologies.length > 0 && <ProjectMeta technologies={technologies} class="mt-2" />}
         </div>
 
         {/* Right: year */}

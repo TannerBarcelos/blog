@@ -38,6 +38,12 @@ const projects = defineCollection({
         description: z.string().optional(),
         publishDate: z.coerce.date(),
         isFeatured: z.boolean().default(false),
+        /** Employer / client work — hides the GitHub link since the code isn't mine to share. */
+        isWorkProject: z.boolean().default(false),
+        /** Repo link, shown under the title with a GitHub icon. Omit for work projects or private repos. */
+        github: z.string().url().optional(),
+        /** Stack chips rendered under the title (e.g. React, Swift, PostgreSQL). */
+        technologies: z.array(z.string()).default([]),
         /** Apps vs AI & agents — drives the two lane tabs on the projects page. */
         lane: projectLaneSchema.default('apps'),
         tags: z.array(projectTagIdSchema).min(1).default(['planned']),

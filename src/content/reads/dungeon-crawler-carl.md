@@ -14,8 +14,6 @@ description: >-
   A snarky Earthling drops into a brutal dungeon apocalypse reality show—equal parts comedy, cosmic horror, and
   escalating power fantasy.
 readProgress: reading
-readingNow: true
-readingNowOrder: 1
 seo:
   title: 'Dungeon Crawler Carl — Reads'
   description: "Matt Dinniman's fiction dungeon crawl—currently on my nightstand."

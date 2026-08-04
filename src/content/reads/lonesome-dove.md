@@ -13,7 +13,7 @@ topics:
   - Western
 readProgress: reading
 readingNow: true
-readingNowOrder: 2
+readingNowOrder: 1
 description: >-
   A cattle drive from Texas to Montana — sprawling, humane, and unsparing.
 seo:

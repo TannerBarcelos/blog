@@ -5,6 +5,7 @@ publishDate: 'Aug 01 2026'
 lane: apps
 tags:
   - planned
+github: 'https://github.com/tannerbarcelos/ctx2pod'
 seo:
   description: 'ctx2pod — turn arbitrary context (docs, papers, codebases) into podcast-style audio designed for learning and knowledge discovery.'
 ---

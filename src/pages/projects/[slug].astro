@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectPreview from '../../components/ProjectPreview.astro';
 import { sortItemsByDateDesc } from '../../utils/data-utils';
 import { projectTagsToBadges } from '../../data/project-tags';
+import ProjectMeta from '../../components/ProjectMeta.astro';
 
 export async function getStaticPaths() {
     const projects = (await getCollection('projects')).sort(sortItemsByDateDesc);
@@ -25,7 +26,7 @@ type Props = {
 };
 
 const { project, prevProject, nextProject } = Astro.props;
-const { title, description, seo, publishDate, tags } = project.data;
+const { title, description, seo, publishDate, tags, github, technologies } = project.data;
 const { Content } = await project.render();
 const year = publishDate.getFullYear();
 
@@ -53,6 +54,7 @@ const tagBadges = projectTagsToBadges(tags);
                 </div>
             </div>
             {description && <p class="mt-2 text-lg text-muted leading-relaxed max-w-xl">{description}</p>}
+            <ProjectMeta github={github} technologies={technologies} class="mt-4" />
         </header>
 
         <div class="max-w-none prose prose-dante sm:prose-lg">

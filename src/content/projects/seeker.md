@@ -5,6 +5,12 @@ publishDate: 'Apr 14 2026'
 lane: apps
 tags:
   - in-progress
+github: 'https://github.com/tannerbarcelos/seeker'
+technologies:
+  - Swift
+  - SwiftUI
+  - SwiftData
+  - Supabase
 seo:
   description: 'Seeker — a native iOS podcast app with multiple independent queues and semantic, intent-based episode discovery.'
 ---
