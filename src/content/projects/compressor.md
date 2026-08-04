@@ -10,6 +10,7 @@ github: 'https://github.com/tannerbarcelos/compressor'
 technologies:
   - TypeScript
   - Effect
+  - Bun
 seo:
   description: 'Compressor — filters noisy command output (tests, builds, installs) down to what a coding agent actually needs, before it spends context.'
 ---
@@ -19,7 +20,7 @@ seo:
 **Project Overview:**
 The biggest source of waste in an agentic coding loop isn't the conversation—it's the command output. Every test run, package install, and build spits out hundreds of lines an agent has to read: pass/fail spam, dependency chatter, environment metadata. Somewhere in there are the two or three lines that actually matter—the failing assertion, the exit code, the one warning that's load-bearing. The agent pays full price in tokens to find them, every single time.
 
-Compressor sits between a command and the agent reading its output. It doesn't summarize blindly or chop by length—it filters by recognizing the shape of the command that produced the output, so the reduction is targeted at what's actually noise for that command, not a generic truncation that might cut the one line that mattered.
+Compressor is a CLI: you wrap a command with it, and it sits between that command and the agent reading its output. It doesn't summarize blindly or chop by length—it filters by recognizing the shape of the command that produced the output, so the reduction is targeted at what's actually noise for that command, not a generic truncation that might cut the one line that mattered.
 
 ## The Problem
 
@@ -41,9 +42,10 @@ The intended shape is a set of command-aware filters rather than one generic sum
 ## Technology Stack
 
 - **Language:** TypeScript
-- **Runtime & structure:** Effect, for typed errors, structured concurrency, and composable pipelines through the compression stages — a chance to use Effect for real rather than just read about it.
+- **Structure:** Effect, for typed errors, structured concurrency, and composable pipelines through the compression stages — a chance to use Effect for real rather than just read about it.
+- **Distribution:** compiled to a single native binary via `bun build --compile`, no runtime install required on the target machine.
 
-Tools in this space commonly ship as standalone compiled binaries (often Go). Compressor is deliberately a TypeScript library instead—Effect gives it typed, composable pipelines while staying embeddable directly inside existing Node/TypeScript agent tooling, rather than requiring a separately wrapped process.
+Tools in this space commonly ship as standalone binaries written in Go. Compressor takes the same distribution model—install one binary, wrap your commands, done—while getting there through TypeScript and Effect instead.
 
 ## Status
 
