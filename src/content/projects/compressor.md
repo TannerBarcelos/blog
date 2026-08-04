@@ -8,7 +8,8 @@ tags:
 isFeatured: true
 github: 'https://github.com/tannerbarcelos/compressor'
 technologies:
-  - Rust
+  - TypeScript
+  - Effect
 seo:
   description: 'Compressor — a context-compression layer that shrinks prompts before LLM inference to cut token spend and reclaim usable context window.'
 ---
@@ -39,7 +40,8 @@ The intended shape is a drop-in layer rather than a framework—something you po
 
 ## Technology Stack
 
-- **Language:** Rust, for predictable low-latency compression on the hot path and safe, efficient handling of large context payloads.
+- **Language:** TypeScript
+- **Runtime & structure:** Effect, for typed errors, structured concurrency, and composable pipelines through the compression stages — a chance to use Effect for real rather than just read about it.
 
 ## Status
 
