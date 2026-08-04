@@ -8,12 +8,14 @@ tags:
 seo:
   image:
     src: '/rolemark.png'
-    alt: RoleMark dashboard showing resume scoring and tailoring workflow
+    alt: RoleMark dashboard from the first version — resume scoring and tailoring workflow
 ---
 
-![Project preview](/rolemark.png)
+![RoleMark dashboard from the first version](/rolemark.png)
 
-**Note:** RoleMark is being **rebuilt from scratch**. The first version shipped and has since been archived; the current repository is a ground-up rewrite on a new stack, carrying forward the product thesis below.
+_The first version's scoring and tailoring dashboard._
+
+**Note:** RoleMark is being **re-architected and rebuilt from scratch**. The first version shipped, is no longer running, and its codebase is archived. The current repository is a ground-up rewrite on a new stack, carrying forward the product thesis below.
 
 **Project Overview:**
 RoleMark is built around a simple idea: every role deserves the right resume. Job seekers upload a resume and job description to get an instant compatibility score with actionable feedback, then generate role-specific resume versions tuned for ATS systems and hiring managers. The product also includes AI-assisted cover letters, a rich editing experience, and workflow tools to stay organized across applications.
@@ -37,7 +39,7 @@ RoleMark is built around a simple idea: every role deserves the right resume. Jo
 
 ## The Rebuild
 
-The first version was a Next.js App Router app on Supabase with Stripe billing and a Tiptap-based editor. It proved the product out, but accumulated enough structural debt that extending it cost more than restarting. The rewrite trades that foundation for a lighter, faster one and keeps the parts that earned their place.
+The first version was a Next.js App Router app on Supabase with Stripe billing and a Tiptap-based editor. It proved the product out, then came down—the rewrite is a re-architecture rather than a refactor, trading that foundation for a lighter, faster one while keeping the parts that earned their place.
 
 ## Technology Stack
 
@@ -48,4 +50,4 @@ The first version was a Next.js App Router app on Supabase with Stripe billing a
 
 ## Outcome
 
-_The original version shipped with AI scoring, paid tailoring and cover-letter flows, and integrated billing. That codebase is now archived and the product is being rebuilt on a new foundation._
+_The original version shipped with AI scoring, paid tailoring and cover-letter flows, and integrated billing. It is no longer running, and the product is being re-architected and rebuilt on a new foundation._
