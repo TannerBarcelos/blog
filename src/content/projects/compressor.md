@@ -1,6 +1,6 @@
 ---
 title: 'Compressor'
-description: 'Compress context before LLM inference to reduce token consumption, lower inference costs, and maximize effective context window utilization.'
+description: 'Compress noisy command output before it reaches an agent''s context, cutting token waste without losing the signal a coding agent actually needs.'
 publishDate: 'Aug 01 2026'
 lane: ai
 tags:
@@ -11,37 +11,39 @@ technologies:
   - TypeScript
   - Effect
 seo:
-  description: 'Compressor — a context-compression layer that shrinks prompts before LLM inference to cut token spend and reclaim usable context window.'
+  description: 'Compressor — filters noisy command output (tests, builds, installs) down to what a coding agent actually needs, before it spends context.'
 ---
 
 **Note:** This project is **planned**: the repository is staked out and the problem is scoped, but implementation has not started. The write-up below describes intent, not shipped behavior.
 
 **Project Overview:**
-Every agentic system eventually runs into the same wall: context is finite, and most of what gets stuffed into it is redundant. Tool output repeats itself, file contents get re-sent on every turn, conversation history accumulates verbatim, and retrieved documents arrive padded with boilerplate. You pay for all of it—twice, in tokens and in the attention budget the model has left for the part that actually matters.
+The biggest source of waste in an agentic coding loop isn't the conversation—it's the command output. Every test run, package install, and build spits out hundreds of lines an agent has to read: pass/fail spam, dependency chatter, environment metadata. Somewhere in there are the two or three lines that actually matter—the failing assertion, the exit code, the one warning that's load-bearing. The agent pays full price in tokens to find them, every single time.
 
-Compressor sits between your application and the model. It takes the context you were about to send, compresses it, and hands back something smaller that preserves what the model needs to answer correctly.
+Compressor sits between a command and the agent reading its output. It doesn't summarize blindly or chop by length—it filters by recognizing the shape of the command that produced the output, so the reduction is targeted at what's actually noise for that command, not a generic truncation that might cut the one line that mattered.
 
 ## The Problem
 
-- **Token cost scales with waste.** Long-running agent loops re-send the same context on every turn, so redundancy compounds linearly with session length.
-- **Context windows are a budget, not a container.** A large window doesn't help if two-thirds of it is filler; effective utilization matters more than raw size.
-- **Relevance degrades with volume.** Padding a prompt with everything that *might* be useful measurably hurts the quality of what comes back.
+- **Command output dominates waste.** Test runs, installs, and build logs are the single biggest source of redundant tokens in an agent loop—far more than conversation history or file contents.
+- **Blind truncation loses the wrong thing.** Cutting output for length alone risks dropping the actual failure or next clue, which sends an agent into repeated, uninformed retries instead of fixing the real problem.
+- **Context windows are a budget, not a container.** A large window doesn't help if most of it is filler; effective utilization matters more than raw size.
 
 ## Objectives
 
-1. **Cut token consumption** — reduce the number of tokens sent per inference call without changing the calling code's shape.
-2. **Lower inference cost** — make compression pay for itself against the price of the tokens it removes.
-3. **Maximize effective context utilization** — spend the window on signal, so more of the model's attention lands on the parts that drive the answer.
-4. **Preserve fidelity** — compression that quietly drops load-bearing detail is worse than no compression; correctness is the constraint, not the goal to trade away.
+1. **Cut token waste from command output** — reduce test, install, and build logs to what an agent needs without changing the command being run.
+2. **Preserve the signal, not just the length** — failures, summaries, counts, and next clues survive; everything else is safe to drop.
+3. **Lower inference cost** — make compression pay for itself against the price of the tokens it removes.
+4. **Stay correct under compression** — a filter that quietly drops load-bearing detail is worse than no filter at all.
 
 ## Direction
 
-The intended shape is a drop-in layer rather than a framework—something you point at an existing prompt-assembly path and measure, with compression aggressiveness as a tunable dial and a way to verify that answers don't regress once it's on.
+The intended shape is a set of command-aware filters rather than one generic summarizer—recognizing common command output (test runners, package managers, build tools, git) and reducing each to its own shape of signal, with a tunable aggressiveness dial and a way to verify agents don't regress once it's on.
 
 ## Technology Stack
 
 - **Language:** TypeScript
 - **Runtime & structure:** Effect, for typed errors, structured concurrency, and composable pipelines through the compression stages — a chance to use Effect for real rather than just read about it.
+
+Tools in this space commonly ship as standalone compiled binaries (often Go). Compressor is deliberately a TypeScript library instead—Effect gives it typed, composable pipelines while staying embeddable directly inside existing Node/TypeScript agent tooling, rather than requiring a separately wrapped process.
 
 ## Status
 
