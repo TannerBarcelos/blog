@@ -5,6 +5,7 @@ publishDate: 'Aug 01 2026'
 lane: ai
 tags:
   - planned
+github: 'https://github.com/tannerbarcelos/kiln'
 seo:
   description: 'Kiln — an open platform covering the full lifecycle of production agents: build, evaluate, package, deploy, govern, operate.'
 ---

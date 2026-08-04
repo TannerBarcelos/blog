@@ -5,6 +5,12 @@ publishDate: 'Aug 04 2026'
 lane: apps
 tags:
   - in-progress
+isFeatured: true
+github: 'https://github.com/tannerbarcelos/relay'
+technologies:
+  - Swift
+  - SwiftUI
+  - AppKit
 seo:
   description: 'Relay — a native macOS control plane for running, reviewing, and approving coding agents, organized around an agent inbox.'
 ---

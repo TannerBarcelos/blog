@@ -1,0 +1,40 @@
+---
+import SimpleIcon from './SimpleIcon.astro';
+import { siGithub } from 'simple-icons';
+
+type Props = {
+    github?: string;
+    technologies: string[];
+    class?: string;
+};
+
+const { github, technologies, class: className } = Astro.props;
+const hasContent = Boolean(github) || technologies.length > 0;
+---
+
+{
+    hasContent && (
+        <div class:list={['flex flex-wrap items-center gap-2', className]}>
+            {github && (
+                <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1.5 font-mono text-xs px-1.5 py-0.5 leading-tight border border-main/15 bg-main/[0.04] text-muted hover:text-main hover:border-main/30 transition-colors duration-200 dark:bg-main/[0.06] dark:border-main/20"
+                >
+                    <SimpleIcon icon={siGithub} class="w-3 h-3" />
+                    GitHub
+                </a>
+            )}
+            {technologies.length > 0 && (
+                <div class="flex flex-wrap items-center gap-1.5">
+                    {technologies.map((tech) => (
+                        <span class="font-mono text-[0.65rem] uppercase tracking-wide text-muted/70 px-1.5 py-0.5 leading-tight border border-main/15 bg-main/[0.04] dark:bg-main/[0.06] dark:border-main/20">
+                            {tech}
+                        </span>
+                    ))}
+                </div>
+            )}
+        </div>
+    )
+}

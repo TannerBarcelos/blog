@@ -5,6 +5,15 @@ publishDate: 'Jan 05 2024'
 lane: apps
 tags:
   - paused
+github: 'https://github.com/tannerbarcelos/spendaro'
+technologies:
+  - Next.js
+  - React Native
+  - TypeScript
+  - Fastify
+  - PostgreSQL
+  - Redis
+  - OpenAI
 seo:
   description: 'Spendaro — personal finance side project (development paused). Expense tracking, budgeting, and AI assistant concept; not shipping.'
   image:

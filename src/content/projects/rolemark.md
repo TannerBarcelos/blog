@@ -5,6 +5,14 @@ publishDate: 'Mar 29 2025'
 lane: apps
 tags:
   - in-progress
+isFeatured: true
+github: 'https://github.com/tannerbarcelos/rolemark'
+technologies:
+  - TanStack Start
+  - React
+  - TypeScript
+  - Vite
+  - Bun
 seo:
   image:
     src: '/rolemark.png'

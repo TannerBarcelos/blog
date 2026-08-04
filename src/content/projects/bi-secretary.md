@@ -5,6 +5,12 @@ publishDate: 'Jan 02 2024'
 lane: apps
 tags:
   - live
+isWorkProject: true
+technologies:
+  - React
+  - TypeScript
+  - Python
+  - Flask
 seo:
   image:
     src: '/bi_secretary.jpeg'
