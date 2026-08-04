@@ -1,69 +1,104 @@
 ---
 title: 'Seeker'
-description: 'A new way to enjoy podcasts. Multi-queue playback so you never lose your place, plus agentic features like natural-language show discovery and queue playground.'
+description: 'A native iOS podcast app built on two ideas most players get wrong: your listening contexts should not collide, and search should understand what you mean. Multiple independent queues plus semantic discovery.'
 publishDate: 'Apr 14 2026'
 lane: apps
 tags:
-  - planned
+  - in-progress
 seo:
-  description: 'Seeker — a podcast player built around multi-queue playback and AI-powered discovery. Switch between unrelated shows without losing your place.'
-  image:
-    src: '/seeker.jpeg'
-    alt: Project preview
+  description: 'Seeker — a native iOS podcast app with multiple independent queues and semantic, intent-based episode discovery.'
 ---
 
-**Note:** This project is **planned**: design and architecture are underway but development has not started yet.
+**Note:** This project is **in progress**: the iOS app is under active development against a defined PRD, targeting a January 2027 release.
 
 **Project Overview:**
-Seeker is a podcast player that rethinks how listeners manage what they're hearing. Traditional apps force every show into a single now-playing queue—switch from a work podcast to something casual and you lose your spot, your up-next list gets shuffled, and you're left digging through history to pick up where you left off. Seeker solves this with **multi-queue playback**: each queue is an independent lane with its own now-playing, progress, and up-next list, so jumping between unrelated shows is instant and non-destructive.
+Seeker is a podcast app built around two ideas most podcast apps get wrong: your listening contexts shouldn't collide, and search should understand what you mean, not just what you typed.
+
+> **North star:** Seeker exists so that a person's listening life can hold more than one interest at a time—without any of them getting lost.
 
 ## The Problem
 
-Every major podcast player—Apple Podcasts, Spotify, Overcast, Pocket Casts—uses a single-queue model. That works fine when you listen to one show at a time, but real listening habits are messier:
+Podcast apps funnel everything into a single master queue. Play something new and whatever you were "up next" on either gets bumped to the bottom or silently drops out while lingering in the UI as if it's still there. Worse, the queue makes no distinction between contexts: an episode about true crime sits next to an episode about distributed systems, and you're stuck skipping around to find something that fits your current mood.
 
-- A commuter queues up industry news for the drive, then switches to a comedy show at the gym.
-- A student lines up lecture recaps for study sessions but wants a true-crime binge on weekends.
-- Anyone who taps play on a new episode mid-queue watches their carefully ordered list get replaced or reordered.
+Discovery is stuck in the past too. Search is keyword matching against titles and show names. There's no way to ask for what you actually want—"true crime shows that focus on the detectives' side of the investigation"—and get episodes that match the idea rather than the words.
 
-In each case the listener has to manually re-find, re-order, or re-start episodes because the app assumes one queue is enough.
+## The Two Pillars
 
-## Core Concepts
+### 1. Multiple, Independent Queues
 
-### Multi-Queue Playback
+Instead of one master queue, you create as many as you want ("True Crime", "Tech"). Each queue is created and managed by you, and each has its own playback state and progress. Playing an episode in one queue never affects, reorders, or drops anything in another. Unrelated interests stay separated without you losing your place in either.
 
-- Create named queues (e.g. "Work", "Wind Down", "Road Trip").
-- Each queue maintains its own now-playing episode, playback position, and up-next list.
-- Switching queues instantly resumes from where you left off—no searching, no re-ordering.
-- Queues can be pinned, archived, or set to auto-populate from subscriptions.
+### 2. Semantic Discovery Search
 
-### Agentic Capabilities
+Search understands intent. A query like "true crime shows that focus on the retelling from the police and detectives on the case" surfaces episodes matching that angle even when none of those exact words appear in the title or description—powered by embeddings over show and episode metadata.
 
-Seeker layers AI on top of the listening experience:
+## Product Invariants
 
-- **Natural-Language Discovery** — describe what you're in the mood for ("something about the history of bridges" or "a funny interview with a chef") and Seeker surfaces matching episodes across the catalog.
-- **Queue Playground** — an interactive sandbox where an agent can suggest, re-order, or remix your queue based on mood, topic, or time budget ("build me a 45-minute commute queue on AI news").
-- **Smart Summaries** — get episode digests before you commit to listening, powered by transcript analysis.
-- **Cross-Queue Insights** — surface connections between episodes across different queues ("the guest on your Work queue also appeared in this Wind Down episode").
+Four promises are treated as non-negotiable and enforced by automated tests on every change:
 
-## Planned Features
+1. **Isolation** — actions in one queue never affect another's contents, order, or position.
+2. **No silent mutation** — episodes only change through direct user action or an explicit, user-enabled setting.
+3. **Durable position** — queue state and resume timestamps survive app termination, device restarts, and arbitrary time gaps.
+4. **Truthful UI, reversible AI** — the display matches storage, and every AI action requires confirmation with one-tap dismissal.
 
-1. **Queue Management** — create, rename, reorder, pin, and archive independent playback queues.
-2. **Seamless Queue Switching** — one tap to jump between queues with full state preservation.
-3. **Subscription Routing** — assign shows to default queues so new episodes land in the right lane automatically.
-4. **Natural-Language Search** — find shows and episodes by describing what you want, not just by title or keyword.
-5. **Queue Playground** — let the AI agent build, remix, or optimize a queue for a given context.
-6. **Episode Summaries** — AI-generated digests from transcripts so you can decide what's worth your time.
-7. **Playback Sync** — seamless handoff across devices with per-queue state.
-8. **Import & Migration** — bring your subscriptions and history from Apple Podcasts, Spotify, and OPML feeds.
+## MVP Scope
 
-## Technology Stack (Planned)
+**Core differentiators**
 
-- Frontend: React Native (iOS & Android), Expo
-- Backend: Node.js, Hono
-- Database: Postgres (Supabase), Vector Store (Supabase)
-- AI Integration: OpenAI, Vercel AI SDK
-- Audio: Expo AV / custom playback engine
+- Multiple manually-created queues with fully independent playback state.
+- Semantic search over show and episode metadata for natural-language discovery.
+
+**Supporting functionality**
+
+- Subscribe to shows and browse episodes.
+- Add an episode to a chosen queue.
+- Playback with per-episode resume position.
+- AI-assisted queue routing: an opt-in setting where the app _suggests_ which queue a newly added episode belongs in. Suggestion only—you still place it.
+
+## Data Model
+
+| Entity          | Purpose                                       |
+| --------------- | --------------------------------------------- |
+| `Show`          | Catalog metadata from the provider            |
+| `Episode`       | Feed content, unique guid per show            |
+| `PlaybackState` | Global progress — one per episode, all queues |
+| `Queue`         | User-created container; auto-remove-played    |
+| `QueueEntry`    | Ordering and position within a queue          |
+| `QueueCursor`   | The per-queue independence mechanism          |
+
+The load-bearing decision: progress is **global** (same episode, same position everywhere) while order and cursor are **per-queue**. That keeps the independence promise without duplicating listening history.
+
+## Success Metric
+
+**Weekly Multi-Queue Listeners** — users who play episodes from two or more distinct queues within seven days. It's a deliberately unforgiving metric: it only moves when people actually use the differentiator, not when they just press play.
+
+## Milestones
+
+- **M0 — Foundation:** subscribe, browse, catalog integration.
+- **M1 — Queues:** full CRUD, ordering, per-queue cursors.
+- **M2 — Playback:** AVPlayer, background audio, durable resume.
+- **M3 — Semantic search:** embedding pipeline, vector search, keyword fallback.
+- **M4 — AI routing and onboarding:** queue suggestions, opt-in setting, two-interest startup.
+- **M5 — Launch readiness:** analytics, error handling, App Store submission.
+
+M1 and M2 together form a shippable product on their own; M3 and M4 add the distinctive parts.
+
+## Technology Stack
+
+- **Platform:** Native iOS 17+, Swift, SwiftUI
+- **Persistence:** SwiftData, local-first, transactional queue writes
+- **Audio:** AVPlayer with MPNowPlayingInfoCenter for native controls and background playback
+- **Catalog:** Podcast Index API with an iTunes fallback
+- **Search:** Supabase + pgvector for vector ANN search, with keyword fallback offline
+- **AI routing:** Embedding-based nearest-centroid clustering — no LLM calls, reusing episode embeddings
+- **Analytics:** Local-first event logging
+
+Search runs over a bounded corpus—subscribed shows plus a curated discovery set—to hold infrastructure cost under a hard ceiling. If discovery feels thin, the response is to narrow the claim rather than blow the budget.
+
+## Out of Scope for v1
+
+Android, web, Apple Watch, cross-device sync, accounts, cloud backup, social features, per-queue playback settings, queue sharing, transcript-level search, and fully automatic queue generation. Cross-device sync is the leading candidate for post-launch reconsideration.
 
 ## Outcome
 
-_In the planning phase—architecture and design work is in progress._
+_In active development against the milestone plan above._

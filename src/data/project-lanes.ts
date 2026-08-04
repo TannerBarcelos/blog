@@ -1,9 +1,10 @@
 /**
- * Valid project lane ids for the “Things I’ve built” tabs (Apps vs AI & agents).
+ * Valid project lane ids for the “Things I’ve built” tabs (Apps vs AI).
+ * `apps` is for products people use; `ai` is for AI infrastructure and tooling.
  * To add a lane: append an id here and a label in `projectLaneTabLabel`, extend the projects schema,
  * then add a matching tab link in `ProjectsLaneToggle.astro`.
  */
-export const PROJECT_LANES = ['apps', 'ai-agents'] as const;
+export const PROJECT_LANES = ['apps', 'ai'] as const;
 
 export type ProjectLane = (typeof PROJECT_LANES)[number];
 
@@ -19,7 +20,7 @@ export function parseProjectLaneFromParam(value: string | undefined): ProjectLan
 /** Short labels for tab controls (sharp / mono styling applied in components). */
 export const projectLaneTabLabel: Record<ProjectLane, string> = {
     apps: 'Apps',
-    'ai-agents': 'AI & agents'
+    ai: 'AI'
 };
 
 export function projectLanePath(lane: ProjectLane): string {
