@@ -14,9 +14,8 @@ topics:
   - Data engineering
 description: >-
   An end-to-end guide to designing production-ready machine-learning systems, covering data, training,
-  deployment, monitoring, and iteration. I’m actively reading it now.
-readingNow: true
-readingNowOrder: 6
+  deployment, monitoring, and iteration.
+readProgress: queued
 seo:
   title: 'Designing Machine Learning Systems — Reads'
   description: 'Chip Huyen on the iterative process behind production-ready ML systems.'

@@ -16,7 +16,7 @@ description: >-
   A practical guide to building applications with foundation models, from model selection and evaluation to
   deployment and production tradeoffs. I’m actively reading it now.
 readingNow: true
-readingNowOrder: 5
+readingNowOrder: 3
 seo:
   title: 'AI Engineering — Reads'
   description: 'Chip Huyen’s practical guide to building applications with foundation models.'

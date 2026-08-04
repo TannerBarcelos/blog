@@ -11,12 +11,14 @@ addedDate: 'Apr 12 2026'
 topics:
   - Fiction
   - Science fiction
-readProgress: queued
+readProgress: reading
+readingNow: true
+readingNowOrder: 4
 description: >-
   Martian underclass infiltrates the ruling order — brutal, propulsive space opera.
 seo:
   title: 'Red Rising — Reads'
-  description: 'Pierce Brown — queued on the leisure shelf.'
+  description: 'Pierce Brown — currently reading on the leisure shelf.'
 ---
 
-On the nightstand queue after I clear the current rotation.
+Currently in the rotation alongside Lonesome Dove.
